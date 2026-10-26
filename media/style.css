@@ -1,0 +1,20 @@
+html, body { margin: 0; padding: 0; background: transparent; }
+body { padding: 8px 10px 10px; font-family: var(--vscode-font-family, system-ui, sans-serif); user-select: none; }
+#card {
+  border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 10px; padding: 8px 11px 10px;
+  background: #171717; color: #ECECEC;
+}
+.lim { display: flex; justify-content: space-between; align-items: baseline; margin-top: 9px; }
+.lim.top { margin-top: 0; }
+.lbl { font-size: 9.5px; font-weight: 600; letter-spacing: 0.06em; color: #ECECEC; }
+.val { font-size: 11px; color: #B4B4B4; }
+.row { display: flex; align-items: center; gap: 9px; margin-top: 5px; }
+.pct { display: flex; align-items: flex-end; flex: none; }
+#pct { font-size: 20px; font-weight: 300; line-height: 1; color: #ECECEC; }
+.sign { font-size: 11px; color: #8F8F8F; margin: 0 0 1px 1px; }
+.bar { height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.12); margin-top: 4px; overflow: hidden; }
+.row .bar { flex: 1; margin-top: 0; }
+.bar.thin { height: 4px; border-radius: 2px; }
+.bar > div { height: 100%; width: 0; border-radius: inherit; transition: width 0.4s; }
+#barS { background: #ECECEC; }
+#barW { background: #8F8F8F; }

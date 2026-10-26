@@ -1,0 +1,43 @@
+{
+  "name": "chatgpt-usage",
+  "displayName": "ChatGPT Usage",
+  "description": "Your ChatGPT plan's Codex limits (5-hour and weekly) in a small sidebar card.",
+  "version": "0.1.0",
+  "publisher": "laineylouiseward",
+  "license": "MIT",
+  "icon": "icon.png",
+  "repository": { "type": "git", "url": "https://github.com/LaineyLouiseWard/chatgpt-usage-vscode" },
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other", "Visualization"],
+  "keywords": ["chatgpt", "codex", "openai", "usage", "limits"],
+  "main": "./extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "views": {
+      "explorer": [
+        { "type": "webview", "id": "chatgptUsage.view", "name": "ChatGPT Usage" }
+      ]
+    },
+    "commands": [
+      { "command": "chatgptUsage.refresh", "title": "Refresh Usage", "category": "ChatGPT Usage", "icon": "$(refresh)" }
+    ],
+    "menus": {
+      "view/title": [
+        { "command": "chatgptUsage.refresh", "when": "view == chatgptUsage.view", "group": "navigation@1" }
+      ]
+    },
+    "configuration": {
+      "title": "ChatGPT Usage",
+      "properties": {
+        "chatgptUsage.codexPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the codex program. Empty: PATH, then nvm's folders."
+        },
+        "chatgptUsage.refreshSeconds": { "type": "number", "default": 60, "minimum": 30, "description": "How often to read the limits (codex app-server, which calls no model)." },
+        "chatgptUsage.warnPercent": { "type": "number", "default": 60, "description": "The 5-hour number turns yellow from here." },
+        "chatgptUsage.critPercent": { "type": "number", "default": 85, "description": "The 5-hour number turns red from here." }
+      }
+    }
+  }
+}
