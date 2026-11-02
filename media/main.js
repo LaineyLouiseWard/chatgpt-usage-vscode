@@ -19,22 +19,31 @@
   }
 
   // OpenAI's own black and white; only a filling 5-hour window takes colour.
+  // The figure the card leads with: the 5-hour window, or the week on a plan without one.
+  function lead(u) {
+    if (u && u.session !== null && u.session !== undefined) return { pct: u.session, reset: u.sessionReset, week: false };
+    if (u && u.week !== null && u.week !== undefined) return { pct: u.week, reset: u.weekReset, week: true };
+    return null;
+  }
+
   function render() {
-    const u = usage;
+    const u = usage, L = lead(u);
     $('name').textContent = u && u.plan ? `CHATGPT ${u.plan.toUpperCase()}` : 'CHATGPT';
-    if (!u || u.session === null || u.session === undefined) {
+    if (!L) {
       $('pct').textContent = '--';
       $('barS').style.width = '0';
       $('reset').textContent = note;
     } else {
-      const lv = level(u.session);
-      $('pct').textContent = String(u.session);
+      const lv = level(L.pct);
+      $('pct').textContent = String(L.pct);
       $('pct').style.color = lv === 'ok' ? '' : COL[lv];
-      $('barS').style.width = `${Math.min(100, u.session)}%`;
+      $('barS').style.width = `${Math.min(100, L.pct)}%`;
       $('barS').style.background = lv === 'ok' ? '' : COL[lv];
-      const s = u.sessionReset ? span(u.sessionReset) : null;
-      $('reset').textContent = s ? `resets in ${s}` : '';
+      const s = L.reset ? span(L.reset) : null;
+      $('reset').textContent = s ? `${L.week ? 'week resets' : 'resets'} in ${s}` : '';
     }
+    // When the week leads, its own row would repeat the big number.
+    $('weekLim').style.display = $('weekBar').style.display = L && L.week ? 'none' : '';
     const wk = u && u.week !== null && u.week !== undefined ? u.week : null;
     const ws = wk !== null && u.weekReset ? span(u.weekReset) : null;
     $('week').textContent = wk === null ? '' : `${wk}%` + (ws ? `  ·  ${ws}` : '');

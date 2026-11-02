@@ -2,7 +2,7 @@
   "name": "chatgpt-usage",
   "displayName": "ChatGPT Usage",
   "description": "Your ChatGPT plan's Codex limits (5-hour and weekly) in a small sidebar card.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "laineylouiseward",
   "license": "MIT",
   "icon": "icon.png",

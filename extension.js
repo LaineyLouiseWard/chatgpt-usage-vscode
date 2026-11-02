@@ -106,8 +106,8 @@ class UsageView {
 <div id="card">
   <div class="lim top"><span class="lbl" id="name">CHATGPT</span><span id="reset" class="val">loading...</span></div>
   <div class="row"><div class="pct"><span id="pct">--</span><span class="sign">%</span></div><div class="bar"><div id="barS"></div></div></div>
-  <div class="lim"><span class="lbl">WEEK</span><span id="week" class="val"></span></div>
-  <div class="bar thin"><div id="barW"></div></div>
+  <div class="lim" id="weekLim"><span class="lbl">WEEK</span><span id="week" class="val"></span></div>
+  <div class="bar thin" id="weekBar"><div id="barW"></div></div>
 </div>
 <script nonce="${nonce}" src="${src('main.js')}"></script>
 </body></html>`;

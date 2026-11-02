@@ -8,7 +8,8 @@ Unofficial project, not made by or affiliated with OpenAI.
 
 ## What it shows
 
-- The plan name, the 5-hour window as a number and a bar, and the time until it resets. The number turns yellow at 60% and red at 85%; otherwise the card stays black and white.
+- The plan name, the 5-hour window as a number and a bar, and the time until it resets; on a plan with no 5-hour window, the week takes its place. The number turns yellow at 60%
+  and red at 85%; otherwise the card stays black and white.
 - The weekly limit with its reset time.
 
 ## Install
@@ -36,6 +37,7 @@ It is plain JavaScript and runs as written. To package it, run `npx @vscode/vsce
 
 - [Clawd Usage for VS Code](https://github.com/LaineyLouiseWard/clawd-usage-vscode): Claude plan usage with Clawd the crab.
 - [Clawd Usage for Linux](https://github.com/LaineyLouiseWard/clawd-usage-linux): the same Clawd as a desktop widget.
+- [Gemini Usage for VS Code](https://github.com/LaineyLouiseWard/gemini-usage-vscode): your Google AI plan's weekly Antigravity CLI limits in the same kind of card.
 
 ## Licence
 
