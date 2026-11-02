@@ -11,6 +11,8 @@ Unofficial project, not made by or affiliated with OpenAI.
 - The plan name, the 5-hour window as a number and a bar, and the time until it resets; on a plan with no 5-hour window, the week takes its place. The number turns yellow at 60%
   and red at 85%; otherwise the card stays black and white.
 - The weekly limit with its reset time.
+- A window whose reset time has passed shows 0% and "reset": Codex keeps the old figure until the next request
+  opens a new window.
 
 ## Install
 

@@ -21,8 +21,8 @@
   // OpenAI's own black and white; only a filling 5-hour window takes colour.
   // The figure the card leads with: the 5-hour window, or the week on a plan without one.
   function lead(u) {
-    if (u && u.session !== null && u.session !== undefined) return { pct: u.session, reset: u.sessionReset, week: false };
-    if (u && u.week !== null && u.week !== undefined) return { pct: u.week, reset: u.weekReset, week: true };
+    if (u && u.session !== null && u.session !== undefined) return { pct: u.session, reset: u.sessionReset, lapsed: u.sessionLapsed, week: false };
+    if (u && u.week !== null && u.week !== undefined) return { pct: u.week, reset: u.weekReset, lapsed: u.weekLapsed, week: true };
     return null;
   }
 
@@ -40,7 +40,7 @@
       $('barS').style.width = `${Math.min(100, L.pct)}%`;
       $('barS').style.background = lv === 'ok' ? '' : COL[lv];
       const s = L.reset ? span(L.reset) : null;
-      $('reset').textContent = s ? `${L.week ? 'week resets' : 'resets'} in ${s}` : '';
+      $('reset').textContent = s ? `${L.week ? 'week resets' : 'resets'} in ${s}` : L.lapsed ? `${L.week ? 'week' : 'window'} reset` : '';
     }
     // When the week leads, its own row would repeat the big number.
     $('weekLim').style.display = $('weekBar').style.display = L && L.week ? 'none' : '';

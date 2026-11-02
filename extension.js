@@ -68,14 +68,19 @@ function readCodexLimits(exe) {
 }
 
 // primary is the 5-hour window, secondary the week; a plan without one sends null.
-function parseCodexLimits(r) {
+// Codex keeps reporting a window's old share until the next request opens a new window, so a window whose
+// reset time has passed is shown as 0% and "reset".
+function parseCodexLimits(r, now = Date.now()) {
   const win = (w) => (w && typeof w.usedPercent === 'number' ? w : null);
   const p = win(r && r.primary), w = win(r && r.secondary);
   if (!p && !w) return null;
+  const lapsed = (x) => !!(x && x.resetsAt && x.resetsAt * 1000 <= now);
+  const pct = (x) => (lapsed(x) ? 0 : Math.round(x.usedPercent));
+  const reset = (x) => (x.resetsAt && !lapsed(x) ? x.resetsAt * 1000 : null);
   return {
     plan: r.planType || null,
-    session: p ? Math.round(p.usedPercent) : null, sessionReset: p && p.resetsAt ? p.resetsAt * 1000 : null,
-    week: w ? Math.round(w.usedPercent) : null, weekReset: w && w.resetsAt ? w.resetsAt * 1000 : null,
+    session: p ? pct(p) : null, sessionReset: p ? reset(p) : null, sessionLapsed: lapsed(p),
+    week: w ? pct(w) : null, weekReset: w ? reset(w) : null, weekLapsed: lapsed(w),
   };
 }
 
